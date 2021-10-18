@@ -31,4 +31,17 @@ LITERAL
 
 ID: [\p{Alpha}\p{General_Category=Other_Letter}] [\p{Alnum}\p{General_Category=Other_Letter}]* ;
 
-instruction: (LITERAL|ID) (WS (LITERAL | ID))+ ;
+expression:
+	(LITERAL|ID) (WS (LITERAL | ID))+ ;
+
+if_stmt:
+	'if' expression 'then' ;
+
+if_else_stmt:
+	'if' expression 'then' expression 'else' expression 'then' ;
+
+do_stmt:
+	'do' expression 'loop' ;
+
+statement:
+	if_stmt | if_else_stmt | do_stmt ;
