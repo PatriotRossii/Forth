@@ -1,5 +1,23 @@
 grammar Forth;
 
+fragment DIGIT:
+	[0-9] ;
+
+INTEGER
+	: '-'? DIGIT+ ;
+	
+DOUBLE
+	: '-'? DIGIT+ '.' DIGIT+ ([Ee] [+-]? DIGIT+)? ;
+
+STRING:
+	: '"' ('\\' (~'\\'|'\\')? | ^[\\"] )* '"'
+
+LITERAL
+	: INTEGER
+	: DOUBLE
+	| STRING
+	;
+
 BLOCK_COMMENT
 	: '/*' .*? '*/' -> channel(HIDDEN)
 	;
