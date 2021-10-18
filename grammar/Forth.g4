@@ -9,12 +9,12 @@ INTEGER
 DOUBLE
 	: '-'? DIGIT+ '.' DIGIT+ ([Ee] [+-]? DIGIT+)? ;
 
-STRING:
-	: '"' ('\\' (~'\\'|'\\')? | ^[\\"] )* '"' ;
+STRING
+	: '"' ('\\' (~'\\'|'\\')? | ~[\\"] )* '"' ;
 
 LITERAL
 	: INTEGER
-	: DOUBLE
+	| DOUBLE
 	| STRING
 	;
 
