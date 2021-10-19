@@ -5,13 +5,13 @@ fragment DIGIT:
 
 NEWLINE: '\r'* '\n';
 
-WS : [ \t\r\n\f]+ -> channel(HIDDEN) ;
+WS : [ \t\r\n\f]+ -> skip ;
 
 BLOCK_COMMENT
-	: '/*' .*? '*/' -> channel(HIDDEN)
+	: '/*' .*? '*/' -> skip
 	;
 LINE_COMMENT
-	: '//' ~[\r\n]* -> channel(HIDDEN)
+	: '//' ~[\r\n]* -> skip
 	;
 
 INTEGER
@@ -63,20 +63,21 @@ constant_def:
 // --------------
 
 class_header:
-	':' 'CLASS' ID ;
+	'CLASS' ID ;
 
 class_member
 	: variable_def
 	| word_def ;
 
 class_body:
-		class_member+ ;
+    class_member+
+    ;
 
 class_end:
-	':' 'CLASS' ';' ;
+	'CLASS' ';' ;
 
 class_def:
-	class_header class_body class_end ;
+	class_header class_body* class_end ;
 
 // --------------
 
