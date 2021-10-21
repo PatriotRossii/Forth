@@ -20,8 +20,9 @@ find_package(ANTLR REQUIRED)
 antlr_target(
     ForthGrammar
     ${CMAKE_CURRENT_SOURCE_DIR}/grammar/Forth.g4
+    OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/grammar/antlr
     BOTH
-    "forth::grammar"
+    PACKAGE "forth::grammar"
 )
 
 set(SOURCE_FILES main.cpp)
