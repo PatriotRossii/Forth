@@ -37,13 +37,21 @@ expression
 	;
 
 if_stmt:
-	'if' expression+ 'then' ;
+	'if'
+        true_branch+=expression+ 
+    'then' ;
 
 if_else_stmt:
-	'if' expression+ 'then' expression+ 'else' expression+ 'then' ;
+	'if' 
+        true_branch+=expression+ 
+    'else' 
+        false_branch+=expression+ 
+    'then' ;
 
 do_stmt:
-	'do' expression+ 'loop' ;
+	'do' 
+        expressions+=expression+
+    'loop' ;
 
 statement:
 	if_stmt | if_else_stmt | do_stmt ;
@@ -76,8 +84,7 @@ class_body:
 class_end:
 	'CLASS' ';' ;
 
-class_def:
-	class_header class_body* class_end ;
+class_def: class_header body=class_body* class_end ;
 
 // --------------
 
